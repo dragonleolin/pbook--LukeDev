@@ -4,6 +4,7 @@ import cors from "cors";
 
 import products from "./api/products";
 import orders from "./api/orders";
+import register from "./api/register"
 
 const app = express();
 const mysql = require("mysql");
@@ -22,17 +23,23 @@ app.use(cors());
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
+//抓取頁面
+// app.use(express.static(path.join(__dirname, 'public')))
+
 
 app.use("/products", products);
 app.use("/orders", orders);
+app.post("/register", register)
 
 app.use(express.static("public"));
 
-app.get("/", function(req, res) {
+app.get("/", function(req, res, next) {
   res.send("Home");
 });
 
-app.use("/forum", require("./src/forum/homepage"));
+
+
+// app.use("/forum", require("./src/forum/homepage"));
 
 //if we are here then the specified request is not found
 app.use((req, res, next) => {
@@ -51,5 +58,7 @@ app.use((err, req, res, next) => {
     }
   });
 });
+
+
 
 module.exports = app;
