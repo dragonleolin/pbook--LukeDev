@@ -31,6 +31,11 @@ class Member{
         return sql
     }
 
+    getLoginSql(){
+        let sql = `SELECT * FROM 'mr_information' WHERE MR_email = '${this.MR_email}' && MR_password = '${this.MR_password}'`
+        return sql
+    }
+
 
 }
 

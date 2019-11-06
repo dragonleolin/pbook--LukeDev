@@ -5,6 +5,7 @@ import cors from "cors";
 import products from "./api/products";
 import orders from "./api/orders";
 import register from "./api/register"
+import login from "./api/login"
 
 const app = express();
 const mysql = require("mysql");
@@ -18,18 +19,20 @@ db.connect();
 
 const bluebird = require("bluebird");
 bluebird.promisifyAll(db);
+//session
+// const session = require("express-session")
+// app.use()
+
 
 app.use(cors());
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
-//抓取頁面
-// app.use(express.static(path.join(__dirname, 'public')))
-
 
 app.use("/products", products);
 app.use("/orders", orders);
 app.post("/register", register)
+app.post("/login", login)
 
 app.use(express.static("public"));
 
