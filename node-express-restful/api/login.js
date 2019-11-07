@@ -22,14 +22,15 @@ router.post('/login', (req, res, next) => {
             })
             return
         }else{
-            res.locals.sid = rows[0].sid;
+            res.locals.userId = rows[0].sid;
             //設定session
-            req.session.sid = res.locals.sid; 
-            console.log(req.session.sid);
+            req.session.sid = res.locals.userId; 
+            // console.log(req.session.sid);
 
             res.json({
                 status:"登入成功",
-                message:"歡迎" + rows[0].MR_name + "的登入!"
+                message:"歡迎" + rows[0].MR_name + "的登入!",
+                info: rows[0]
             })
         }
     })
