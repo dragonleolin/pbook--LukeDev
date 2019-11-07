@@ -4,8 +4,7 @@ class Member{
     constructor(name, email, password){
         this.MR_name = name
         this.MR_email = email
-        //進行加密
-        this.MR_password = encryption(password)
+        this.MR_password = password
         console.log(this.MR_name, this.MR_email, this.MR_password)
     }
 
@@ -25,6 +24,8 @@ class Member{
     }
     
     getAddMemberSql(){
+        //進行加密
+        this.MR_password = encryption(this.MR_password)
         //塞入資料
         let sql = `INSERT INTO mr_information(MR_name, MR_email, MR_password, MR_createdDate) 
                         VALUES('${this.MR_name}', '${this.MR_email}', '${this.MR_password}', now()) `
