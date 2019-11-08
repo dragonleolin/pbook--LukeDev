@@ -1,8 +1,9 @@
 import React from 'react'
-import Sidebar from '../../components/sidebar/Sidebar'
-import Edit from '../../components/memberContent/Edit'
-import { Container, Row, Col } from 'react-bootstrap'
-
+import Sidebar from '../../components/member/Sidebar'
+import Edit from './Edit'
+import Info from './Info'
+import {Row} from 'react-bootstrap'
+import Navbar from '../../components/member/Navbar'
 class Member extends React.Component {
   constructor() {
     super()
@@ -13,9 +14,13 @@ class Member extends React.Component {
     return (
       <>
         <Row>
-          <Sidebar />
-          <div style={{ width: '1280px' }}>
-            {/* <Edit /> */}
+          <div className="col">
+            <Navbar />
+            <div className="row">
+              <Sidebar />
+              {/* <Edit /> */}
+              <Info />
+            </div>
           </div>
         </Row>
       </>

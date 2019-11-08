@@ -1,10 +1,12 @@
 import React from 'react'
-import './style.scss'
+import './lukeStyle.scss'
 
 const Edit = () => {
   return (
     <>
-      
+      <div className="editWrap">
+        
+      </div>
     </>
   )
 }
