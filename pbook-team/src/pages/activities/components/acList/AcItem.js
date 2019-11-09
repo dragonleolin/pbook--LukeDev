@@ -1,28 +1,35 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import acImg from '../../images/test.jpg'
+import { Link } from 'react-router-dom'
 
 function AcItem(props) {
   return (
     <>
       <div className="acItem row mt-3">
         <figure className="acImg col-md-4">
-          <a
-            href="#"
+          {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
+          <Link
+            to={'/activities/' + props.acType + '/' + props.sid}
             className="img"
-            style={{ backgroundImage: 'url(' + acImg + ')' }}
-          ></a>
+            style={{
+              backgroundImage:
+                "url('http://localhost:5555/ac/images/" + props.img + "')",
+            }}
+          ></Link>
         </figure>
-        <section className="acContent col-md-5">
-          <a href="#" className="acTitle">
-            <h4>{props.AC_title}</h4>
-          </a>
-          <div className="acIntro ellipsis">
-            我是活動我很快樂我是活動我很快樂我是活動我很快樂我是活動我很快樂我是活動我很快樂我是活動我很快樂我是活動我很快樂我是活動我很快樂我是活動我很快樂
-          </div>
+        <section className="acContent col-md-6">
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+          <Link
+            to={'/activities/' + props.acType + '/' + props.sid}
+            className="acTitle"
+          >
+            <h4>{props.title}</h4>
+          </Link>
+          <div className="acIntro ellipsis">{props.brief_intro}</div>
           <div className="acInfo">
-            <small className="date">{props.AC_date.substring(0, 10)}</small>
+            <small className="date">{props.date.substring(0, 10)}</small>
             <br />
-            <small className="location">{props.AC_eventArea}</small>
+            <small className="location">{props.location}</small>
           </div>
         </section>
       </div>
