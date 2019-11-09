@@ -2,6 +2,7 @@ import React from 'react'
 import './login.css'
 import Carousel from '../../components/indexComponents/carousel/Carousel'
 import '../member/lukeStyle.scss'
+import FbLogin from './FbLogin'
 
 class Login extends React.Component {
   constructor(){
@@ -77,8 +78,7 @@ class Login extends React.Component {
       let container_front = document.querySelector('.container_front')
       container_back.classList.add('flip-to-right')
       container_front.classList.add('_opacity')
-      container_front.classList.remove('_invisible')
-      
+      container_front.classList.remove('_invisible')    
   }
   flipSingIn = () =>{
     let container_right = document.querySelector('.container_right')
@@ -141,10 +141,9 @@ class Login extends React.Component {
             <input className="login_input" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}/>
             <button className="login_btn" onClick={this.handleLogin}>登入</button>
             <a href="link">Forgot your password?</a>
-            <div className="social-container">
-              <div>快速登入</div>
-              <a href="link" className="social">FB</a>
-              <a href="link" className="social">GOOGLE</a>
+            <div className="social-container ">
+              <div className="title">快速登入</div>
+              <div><FbLogin/></div>
             </div>
           </form>
 
