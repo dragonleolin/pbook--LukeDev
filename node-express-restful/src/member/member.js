@@ -44,8 +44,8 @@ router.post('/register', (req, res, next) => {
                         }
                         // 若寫入資料庫成功，則回傳給clinet端下：
                         res.json({
-                            message: "註冊成功"
-
+                            status: "註冊成功",
+                            message:"歡迎" + req.body.name + "的登入!",
                          })
                       })
                 }

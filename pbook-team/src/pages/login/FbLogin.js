@@ -37,8 +37,9 @@ class FbLogin extends React.Component{
         }else{
         fbContent = (
         <FacebookLogin
+        //   appId="468465107359578"
           appId="468465107359578"
-          autoLoad={true}
+          autoLoad={false}
           fields="name,email,picture"
           onClick={this.componentClicked}
           callback={this.responseFacebook}
