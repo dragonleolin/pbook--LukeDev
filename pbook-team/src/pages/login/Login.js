@@ -3,6 +3,7 @@ import './login.css'
 import Carousel from '../../components/indexComponents/carousel/Carousel'
 import '../member/lukeStyle.scss'
 import FbLogin from './FbLogin'
+import swal from '@sweetalert/with-react'
 
 class Login extends React.Component {
   constructor(){
@@ -21,7 +22,34 @@ class Login extends React.Component {
     this.handleRegister = this.handleRegister.bind(this)
   }
 
+  success (status, message){
+    swal({
+      title: status,
+      text: message,
+      icon: "success",
+      button: "OK",
+    }).then(()=>{
+      setTimeout(() => {
+        window.location.href = '/'
+      }, 1000)
+    })
+  }
 
+  fail(status, message){
+    console.log(1111);
+    
+    swal({
+      title: status,
+      text: message,
+      icon: "error",
+      button: "OK",
+    })
+    // .then(()=>{
+    //   setTimeout(() => {
+    //     window.location.href = '/login'
+    //   },5000)
+    // })
+  }
 
 
   handleChange(e){
@@ -29,7 +57,7 @@ class Login extends React.Component {
     const obj = {};
     obj[name] = e.target.value;
     this.setState(obj, ()=>{
-      console.log(this.state)
+      // console.log(this.state)
     });
 
     //解構賦值
@@ -78,23 +106,24 @@ class Login extends React.Component {
       return response.json()
     })
     .then(async data => {
-      console.log(data.info);
-      if(data.status === "登入成功"){
-        
-        localStorage.setItem('user', JSON.stringify(data.info))
-        alert(data.status + data.message)
+      // console.log(data.info);
+      let status = data.status
+      let message = data.message
+      if(status === "登入成功"){
+        await this.success(status, message)
+        await localStorage.setItem('user', JSON.stringify(data.info))
+        // alert(status + message)
         await this.setState({memberData: data.info})
-        await setTimeout(()=>{
-          window.location.href = '/'
-        }, 1000)
-      }else{
-        alert(data.status + data.message)
-        window.location.href = '/login'
+       
+      }
+      if(status === "登入失敗"){
+        console.log(status, message)
+        await this.fail(status, message)
       }
     })
-    .catch(error => {
-      console.log('error = ' + error);
-    })
+    // .catch(error => {
+    //   console.log('error = ' + error);
+    // })
     
   }
 
@@ -157,7 +186,7 @@ class Login extends React.Component {
         .then(async data => {
           console.log(data.info);
           if(data.status === "註冊成功"){
-            alert(data.status + data.message)
+            // alert(data.status + data.message)
             await this.setState({memberData: data.info})
             // await setTimeout(()=>{
             //   window.location.href = '/'
@@ -194,19 +223,19 @@ class Login extends React.Component {
   
 
   render() {
-    console.log(this.state.memberData);
+    // console.log(this.state.memberData);
     
     return (
       <>
       <Carousel />
       <div className="login_wrap" >
       <div className="container_login" >
-          <form action="#" className="container_back" novalidate>
+          <form action="#" className="container_back">
             <div className="login_title">
               <img src={require('./icon_MR_m.svg')} alt="" style={{ width: '30px' }} />
               <h2>品書人註冊</h2>
             </div>
-            <input required className="login_input" name="email" id="email" type="email" placeholder="電子郵件" 
+            <input required className="login_input" name="email" id="email" type="text" placeholder="電子郵件" 
             value={this.state.email} onChange={this.handleChange} />
             <input
               className="login_input"

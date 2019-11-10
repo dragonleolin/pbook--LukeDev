@@ -4,7 +4,6 @@ import '../../pages/member/lukeStyle.scss'
 
 class Navbar extends React.Component {
   render() {
-
     return (
       <>
         <div className="navbarWrap">
